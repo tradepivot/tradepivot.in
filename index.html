@@ -1,50 +1,1208 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Coming Soon - TradePivot</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradePivot - Revolutionary AI Stock Market Analysis | Coming Soon</title>
+    <meta name="description" content="TradePivot - The first ever interactive, chat-first AI-powered stock market analysis platform. Get institutional-grade insights and sniper analysis for your trades and portfolio.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Flowbite CSS CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS CSS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary-blue: #3B82F6;
+            --dark-blue: #1E40AF;
+            --light-blue: #DBEAFE;
+            --gray-text: #6B7280;
+            --dark-bg: #111827;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            text-align: center;
-            padding: 50px 20px;
-            line-height: 1.6;
-            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
         }
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #2c3e50;
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        p {
-            font-size: 18px;
-            margin-bottom: 25px;
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
         }
-        .email {
-            margin-top: 30px;
-            font-size: 16px;
-            color: #7f8c8d;
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .carousel-container {
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+        
+        /* Custom slider indicators */
+        .custom-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: #E5E7EB;
+            display: inline-block;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-dot.active {
+            width: 30px;
+            background-color: var(--primary-blue);
+        }
+        
+        /* Floating elements animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        .floating-delay-1 {
+            animation-delay: 0.5s;
+        }
+        
+        .floating-delay-2 {
+            animation-delay: 1s;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Chat bubble animation */
+        .chat-bubble {
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Glowing effect */
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px -5px rgba(59, 130, 246, 0.3);
+            }
+            to {
+                box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.5);
+            }
+        }
+        
+        /* Data flow animation for background */
+        .data-flow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle, var(--primary-blue) 1px, transparent 1px),
+                radial-gradient(circle, var(--primary-blue) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: dataFlow 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(360deg); }
+        }
+        
+        .email-input:focus {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Dark mode styles */
+        .dark body {
+            background-color: var(--dark-bg);
+            color: #E5E7EB;
+        }
+        
+        .dark .feature-card {
+            background-color: #1F2937;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .dark .feature-card:hover {
+            border: 1px solid rgba(59, 130, 246, 0.5);
         }
     </style>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#DBEAFE',
+                            100: '#BFDBFE',
+                            200: '#93C5FD',
+                            300: '#60A5FA',
+                            400: '#3B82F6',
+                            500: '#2563EB',
+                            600: '#1D4ED8',
+                            700: '#1E40AF',
+                            800: '#1E3A8A',
+                            900: '#1E3A8A',
+                        }
+                    },
+                    animation: {
+                        'typewriter': 'typewriter 4s steps(35) forwards',
+                        'blink': 'blink 1s infinite',
+                    },
+                    keyframes: {
+                        typewriter: {
+                            to: { width: '100%' }
+                        },
+                        blink: {
+                            '0%': { borderColor: 'transparent' },
+                            '50%': { borderColor: 'white' },
+                            '100%': { borderColor: 'transparent' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <h1>Tradepivot is AI powered stock analysis platform</h1>
-        <p>We're working on something exciting that will revolutionize financial technology.</p>
-        <p>Stay tuned for our launch!</p>
-        <div class="email">
-            Contact us: <a href="mailto:contact@tradepivot.in">contact@tradepivot.in</a>
+<body class="antialiased">
+    <!-- Background Elements -->
+    <div class="data-flow top-0 left-0"></div>
+    <div class="data-flow top-0 right-0"></div>
+    <div class="data-flow bottom-0 left-1/4"></div>
+    
+    <!-- Header -->
+    <header class="relative z-10 px-4 py-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="bg-blue-600 text-white p-2 rounded-lg mr-2">
+                    <i class="fas fa-chart-line text-xl"></i>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">Trade<span class="text-blue-600">Pivot</span></h1>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 px-4 pt-10 pb-16 md:py-20">
+        <div class="container mx-auto text-center max-w-4xl">
+            <div data-aos="fade-up" data-aos-delay="100">
+                <span class="inline-block px-4 py-1.5 text-xs md:text-sm font-semibold text-blue-600 bg-blue-100 rounded-full mb-4 dark:bg-blue-900 dark:text-blue-200">Coming Soon</span>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
+                    <span class="gradient-text">Revolutionary</span> AI-Powered<br />Stock Market Analysis
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+                    TradePivot is changing how you analyze the market with its interactive, chat-first approach delivering institutional-grade insights for traders and investors.
+                </p>
+            </div>
+            
+            <div class="relative mb-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 md:p-8 glow overflow-hidden">
+                    <div class="chat-interface bg-gray-50 dark:bg-gray-900 rounded-xl overflow-hidden">
+                        <!-- Chat Header -->
+                        <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center">
+                            <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">TradePivot</span>
+                        </div>
+                        
+                        <!-- Chat Messages -->
+                        <div class="p-4 bg-gray-50 dark:bg-gray-900">
+                            <!-- AI Message -->
+                            <div class="flex mb-4 items-start chat-bubble">
+                                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white mr-3 flex-shrink-0">
+                                    <i class="fas fa-robot text-sm"></i>
+                                </div>
+                                <div class="bg-white dark:bg-gray-800 rounded-t-lg rounded-br-lg p-3 shadow-sm max-w-md">
+                                    <p class="text-sm text-gray-700 dark:text-gray-300">How can I assist with your stock analysis today?</p>
+                                </div>
+                            </div>
+                            
+                            <!-- User Message -->
+                            <div class="flex mb-4 justify-end">
+                                <div class="bg-blue-500 rounded-t-lg rounded-bl-lg p-3 shadow-sm max-w-md">
+                                    <p class="text-sm text-white">Show me tech stocks with strong uptrend and high volume today</p>
+                                </div>
+                            </div>
+                            
+                            <!-- AI Response with Analysis -->
+                            <div class="flex mb-4 items-start chat-bubble">
+                                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white mr-3 flex-shrink-0">
+                                    <i class="fas fa-robot text-sm"></i>
+                                </div>
+                                <div class="bg-white dark:bg-gray-800 rounded-t-lg rounded-br-lg p-3 shadow-sm max-w-md">
+                                    <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">Here are tech stocks showing strong uptrends with high volume today:</p>
+                                    <div class="bg-gray-50 dark:bg-gray-900 p-2 rounded-lg mb-2">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="text-xs font-semibold text-gray-900 dark:text-white">NVDA</span>
+                                            <span class="text-xs text-green-600">↑ 3.42%</span>
+                                        </div>
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="text-xs font-semibold text-gray-900 dark:text-white">MSFT</span>
+                                            <span class="text-xs text-green-600">↑ 2.18%</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-xs font-semibold text-gray-900 dark:text-white">AAPL</span>
+                                            <span class="text-xs text-green-600">↑ 1.87%</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-700 dark:text-gray-300">Would you like me to analyze any specific stock in depth?</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Input Area -->
+                            <div class="mt-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center p-2">
+                                <input type="text" placeholder="Type your query here..." class="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 text-sm text-gray-700 dark:text-gray-300" />
+                                <button class="p-1.5 rounded-lg bg-blue-500 text-white">
+                                    <i class="fas fa-paper-plane text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating UI Elements -->
+                    <div class="absolute top-12 -right-10 floating">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 w-32">
+                            <div class="w-full h-12 bg-gradient-to-r from-green-500 to-green-400 rounded mb-2"></div>
+                            <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full mb-1"></div>
+                            <div class="w-3/4 h-2 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-10 -left-8 floating floating-delay-1">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-2 w-24">
+                            <div class="flex items-center mb-1">
+                                <div class="w-2 h-2 rounded-full bg-red-500 mr-1"></div>
+                                <div class="w-full h-1.5 bg-red-100 dark:bg-red-900 rounded-full"></div>
+                            </div>
+                            <div class="flex items-center mb-1">
+                                <div class="w-2 h-2 rounded-full bg-yellow-500 mr-1"></div>
+                                <div class="w-full h-1.5 bg-yellow-100 dark:bg-yellow-900 rounded-full"></div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                                <div class="w-full h-1.5 bg-green-100 dark:bg-green-900 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-20 -left-12 floating floating-delay-2">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-2 w-28">
+                            <div class="mb-1 text-xs text-center text-gray-700 dark:text-gray-300">Score</div>
+                            <div class="flex justify-center">
+                                <div class="w-12 h-12 rounded-full border-4 border-blue-500 flex items-center justify-center">
+                                    <span class="text-sm font-bold text-blue-600 dark:text-blue-400">89</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Coming Soon Signup -->
+            <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">Get Early Access</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">Be among the first to experience the future of stock market analysis.</p>
+                
+                <form class="flex flex-col sm:flex-row gap-3 mx-auto max-w-md">
+                    <input type="email" class="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none email-input dark:bg-gray-800 dark:text-white" placeholder="Your email address" required />
+                    <button type="submit" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        Notify Me
+                    </button>
+                </form>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-3">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="relative z-10 px-4 py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">The Future of Market Analysis</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    TradePivot is bringing revolutionary capabilities to traders and investors through advanced AI technology.
+                </p>
+            </div>
+            
+            <!-- Features Carousel -->
+            <div class="relative carousel-container overflow-hidden mb-12" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex space-x-6 carousel-items">
+                    <!-- Feature Cards - These will be animated to scroll -->
+                    <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm flex-shrink-0 w-full sm:w-80 md:w-96">
+                        <div class="rounded-lg w-14 h-14 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
+                            <i class="fas fa-comments text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Chat-First Approach</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Interact naturally with our AI assistant to analyze stocks, trends, and get personalized insights through simple conversation.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm flex-shrink-0 w-full sm:w-80 md:w-96">
+                        <div class="rounded-lg w-14 h-14 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
+                            <i class="fas fa-robot text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">AI-Powered Insights</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Our advanced algorithms process millions of data points to deliver actionable insights that were previously only available to institutions.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm flex-shrink-0 w-full sm:w-80 md:w-96">
+                        <div class="rounded-lg w-14 h-14 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
+                            <i class="fas fa-search text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Powerful Screeners</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Access hundreds of customizable stock screeners and scanners to identify opportunities that match your specific criteria.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm flex-shrink-0 w-full sm:w-80 md:w-96">
+                        <div class="rounded-lg w-14 h-14 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Institutional-Grade Analysis</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Get access to the same level of market analysis and insights that institutional investors use to make decisions.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm flex-shrink-0 w-full sm:w-80 md:w-96">
+                        <div class="rounded-lg w-14 h-14 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
+                            <i class="fas fa-crosshairs text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Sniper Analysis</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Precision tools for identifying entry and exit points with high accuracy, optimizing your trading strategy with surgical precision.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm flex-shrink-0 w-full sm:w-80 md:w-96">
+                        <div class="rounded-lg w-14 h-14 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
+                            <i class="fas fa-building text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">B2B Offerings</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Enterprise solutions for financial institutions, advisors, and investment firms looking to enhance their analysis capabilities.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Carousel Controls -->
+                <div class="mt-8 text-center" id="carousel-indicators">
+                    <span class="custom-dot active" data-index="0"></span>
+                    <span class="custom-dot" data-index="1"></span>
+                    <span class="custom-dot" data-index="2"></span>
+                    <span class="custom-dot" data-index="3"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation Showcase -->
+    <section class="relative z-10 px-4 py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div class="rounded-2xl shadow-xl bg-white dark:bg-gray-900 p-6 overflow-hidden">
+                        <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-4">
+                            <div class="flex mb-3">
+                                <div class="flex-1 h-4 bg-blue-200 dark:bg-blue-800 rounded mr-2"></div>
+                                <div class="w-1/4 h-4 bg-blue-200 dark:bg-blue-800 rounded"></div>
+                            </div>
+                            <div class="flex mb-3">
+                                <div class="w-3/4 h-4 bg-blue-200 dark:bg-blue-800 rounded mr-2"></div>
+                                <div class="flex-1 h-4 bg-blue-200 dark:bg-blue-800 rounded"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div class="bg-white dark:bg-gray-700 rounded-lg p-4">
+                                    <div class="h-24 mb-2 bg-gradient-to-b from-green-100 to-green-200 dark:from-green-900 dark:to-green-800 rounded-lg"></div>
+                                    <div class="w-full h-3 bg-gray-200 dark:bg-gray-600 rounded-full mb-1"></div>
+                                    <div class="w-1/2 h-3 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+                                </div>
+                                <div class="bg-white dark:bg-gray-700 rounded-lg p-4">
+                                    <div class="h-24 mb-2 bg-gradient-to-b from-red-100 to-red-200 dark:from-red-900 dark:to-red-800 rounded-lg"></div>
+                                    <div class="w-full h-3 bg-gray-200 dark:bg-gray-600 rounded-full mb-1"></div>
+                                    <div class="w-2/3 h-3 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-2">
+                                <div class="w-1/3 h-8 bg-blue-500 rounded-lg"></div>
+                                <div class="flex">
+                                    <div class="w-8 h-8 rounded-full bg-blue-300 dark:bg-blue-700 mr-2"></div>
+                                    <div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Stock Chart Mockup -->
+                        <div class="relative h-48 bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+                            <div class="absolute inset-0 overflow-hidden">
+                                <!-- SVG Line Chart -->
+                                <svg class="w-full h-full" viewBox="0 0 300 120" preserveAspectRatio="none">
+                                    <!-- Grid Lines -->
+                                    <line x1="0" y1="30" x2="300" y2="30" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4" />
+                                    <line x1="0" y1="60" x2="300" y2="60" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4" />
+                                    <line x1="0" y1="90" x2="300" y2="90" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4" />
+                                    
+                                    <!-- Chart Line -->
+                                    <path d="M0,90 C20,85 40,100 60,80 C80,60 100,70 120,65 C140,60 160,40 180,20 C200,30 220,50 240,40 C260,30 280,50 300,45" 
+                                          fill="none" 
+                                          stroke="#2563EB" 
+                                          stroke-width="3"
+                                          class="path-animation" />
+                                          
+                                    <!-- Area Fill -->
+                                    <path d="M0,90 C20,85 40,100 60,80 C80,60 100,70 120,65 C140,60 160,40 180,20 C200,30 220,50 240,40 C260,30 280,50 300,45 L300,120 L0,120 Z" 
+                                          fill="url(#gradient)" 
+                                          opacity="0.2" />
+                                          
+                                    <!-- Gradient Definition -->
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stop-color="#2563EB" />
+                                            <stop offset="100%" stop-color="#2563EB" stop-opacity="0" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                
+                                <!-- Data Points -->
+                                <div class="absolute top-1/4 left-1/3 w-3 h-3 bg-blue-500 rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-md"></div>
+                                <div class="absolute top-1/2 left-2/3 w-3 h-3 bg-blue-500 rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-md"></div>
+                            </div>
+                            
+                            <!-- Chart Labels -->
+                            <div class="absolute bottom-2 left-0 right-0 flex justify-between text-xs text-gray-500 px-4">
+                                <span>Jan</span>
+                                <span>Feb</span>
+                                <span>Mar</span>
+                                <span>Apr</span>
+                                <span>May</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full mb-4 dark:bg-blue-900 dark:text-blue-200">Revolutionary Platform</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Taking Stock Analysis to the Next Level</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="mr-4 mt-1 w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-1">First-Ever Chat-First Analysis</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Ask questions in plain language and receive detailed analysis instantly, just like chatting with a professional analyst.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="mr-4 mt-1 w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-1">AI-Powered Predictions</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Our advanced algorithms provide predictive analytics that help you anticipate market movements before they happen.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="mr-4 mt-1 w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-1">Portfolio Optimization</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Get personalized recommendations to optimize your portfolio based on your risk tolerance and investment goals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animated Features Grid -->
+    <section class="relative z-10 px-4 py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full mb-4 dark:bg-blue-900 dark:text-blue-200">Everything You Need</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Powerful Features for Every Investor</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    From beginners to professional traders, TradePivot offers the tools you need to make informed investment decisions.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-5">
+                        <i class="fas fa-chart-pie text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Technical Analysis</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Access over 100 technical indicators and chart patterns with AI-powered interpretation of what they mean for your investments.
+                    </p>
+                    <div class="mt-auto">
+                        <div class="w-full h-1 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="w-4/5 h-full bg-purple-500 rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Feature readiness</span>
+                            <span class="text-xs font-medium text-purple-600 dark:text-purple-400">80%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-5">
+                        <i class="fas fa-search-dollar text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Stock Screeners</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Filter stocks based on hundreds of parameters and create custom screens with natural language queries to find the perfect opportunities.
+                    </p>
+                    <div class="mt-auto">
+                        <div class="w-full h-1 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="w-3/4 h-full bg-blue-500 rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Feature readiness</span>
+                            <span class="text-xs font-medium text-blue-600 dark:text-blue-400">75%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 mb-5">
+                        <i class="fas fa-newspaper text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Sentiment Analysis</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Track market sentiment across news, social media, and analyst opinions to understand the emotional drivers behind price movements.
+                    </p>
+                    <div class="mt-auto">
+                        <div class="w-full h-1 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="w-11/12 h-full bg-green-500 rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Feature readiness</span>
+                            <span class="text-xs font-medium text-green-600 dark:text-green-400">90%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600 dark:text-red-400 mb-5">
+                        <i class="fas fa-exclamation-triangle text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Risk Assessment</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Evaluate potential downside with sophisticated risk models that analyze volatility, correlation, and historical drawdowns.
+                    </p>
+                    <div class="mt-auto">
+                        <div class="w-full h-1 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="w-5/6 h-full bg-red-500 rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Feature readiness</span>
+                            <span class="text-xs font-medium text-red-600 dark:text-red-400">85%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-14 h-14 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center text-yellow-600 dark:text-yellow-400 mb-5">
+                        <i class="fas fa-bolt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Real-Time Alerts</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Receive instant notifications about price movements, technical breakouts, or fundamental changes that could impact your investments.
+                    </p>
+                    <div class="mt-auto">
+                        <div class="w-full h-1 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="w-3/5 h-full bg-yellow-500 rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Feature readiness</span>
+                            <span class="text-xs font-medium text-yellow-600 dark:text-yellow-400">60%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-14 h-14 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-5">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Educational Resources</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Learn as you trade with integrated tutorials, market insights, and personalized learning paths based on your experience level.
+                    </p>
+                    <div class="mt-auto">
+                        <div class="w-full h-1 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="w-2/3 h-full bg-indigo-500 rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">Feature readiness</span>
+                            <span class="text-xs font-medium text-indigo-600 dark:text-indigo-400">65%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="relative z-10 px-4 py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full mb-4 dark:bg-blue-900 dark:text-blue-200">Simplified Process</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">How TradePivot Works</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    Our intuitive platform makes market analysis accessible to everyone, from beginners to professional traders.
+                </p>
+            </div>
+            
+            <div class="relative">
+                <!-- Connection Line -->
+                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-blue-200 dark:bg-blue-800 transform -translate-y-1/2 z-0"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mx-auto mb-5 relative">
+                            <span class="text-2xl font-bold">1</span>
+                            <div class="absolute -right-1 -bottom-1 w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-xs">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Ask Questions</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Simply type your market questions in natural language, just like you're chatting with a professional analyst.
+                        </p>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mx-auto mb-5 relative">
+                            <span class="text-2xl font-bold">2</span>
+                            <div class="absolute -right-1 -bottom-1 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs animate-pulse">
+                                <i class="fas fa-cog fa-spin"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">AI Analysis</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Our advanced AI processes millions of data points in real-time to generate comprehensive analysis.
+                        </p>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mx-auto mb-5 relative">
+                            <span class="text-2xl font-bold">3</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Get Insights</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Receive clear, actionable insights with visual charts and data to inform your trading decisions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- B2B Section -->
+    <section class="relative z-10 px-4 py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto max-w-6xl">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 md:p-12 shadow-xl" data-aos="fade-up">
+                <div class="flex flex-col md:flex-row md:items-center">
+                    <div class="md:w-2/3 mb-8 md:mb-0 pr-0 md:pr-12">
+                        <span class="inline-block px-3 py-1 text-xs font-semibold text-white bg-white/20 rounded-full mb-4">For Businesses</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Enterprise-Grade Solutions</h2>
+                        <p class="text-blue-100 mb-8 text-lg">
+                            TradePivot offers tailored solutions for financial institutions, investment firms, and advisors looking to enhance their market analysis capabilities.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="flex items-start">
+                                <div class="mr-3 mt-1">
+                                    <svg class="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">API Integration</h3>
+                                    <p class="text-blue-100 text-sm">Seamlessly integrate our analysis capabilities into your existing platforms</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mr-3 mt-1">
+                                    <svg class="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">White-Label Solutions</h3>
+                                    <p class="text-blue-100 text-sm">Offer our powerful tools under your own brand</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mr-3 mt-1">
+                                    <svg class="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">Custom Deployment</h3>
+                                    <p class="text-blue-100 text-sm">On-premise or private cloud solutions for security-conscious firms</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mr-3 mt-1">
+                                    <svg class="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">Dedicated Support</h3>
+                                    <p class="text-blue-100 text-sm">Enterprise-level support with dedicated account managers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                            <h3 class="text-xl font-bold text-white mb-4">Request Enterprise Info</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <input type="text" class="w-full bg-white/5 border border-blue-300/30 rounded-lg px-4 py-3 text-white placeholder-blue-200/70 focus:outline-none focus:ring-2 focus:ring-white/30" placeholder="Company Name" />
+                                </div>
+                                <div>
+                                    <input type="email" class="w-full bg-white/5 border border-blue-300/30 rounded-lg px-4 py-3 text-white placeholder-blue-200/70 focus:outline-none focus:ring-2 focus:ring-white/30" placeholder="Business Email" />
+                                </div>
+                                <div>
+                                    <select class="w-full bg-white/5 border border-blue-300/30 rounded-lg px-4 py-3 text-white placeholder-blue-200/70 focus:outline-none focus:ring-2 focus:ring-white/30">
+                                        <option value="" class="text-gray-700">Select Company Size</option>
+                                        <option value="small" class="text-gray-700">1-50 employees</option>
+                                        <option value="medium" class="text-gray-700">51-200 employees</option>
+                                        <option value="large" class="text-gray-700">201+ employees</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full bg-white hover:bg-blue-50 text-blue-600 font-medium rounded-lg px-4 py-3 transition-colors duration-300">
+                                    Request Information
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials/Excitement Section -->
+    <section class="relative z-10 px-4 py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full mb-4 dark:bg-blue-900 dark:text-blue-200">Industry Excitement</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">What Experts Are Saying</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    The financial community is buzzing about TradePivot's revolutionary approach to stock market analysis.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial/Excitement 1 -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Alex Johnson</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Financial Analyst</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "TradePivot's AI-powered approach to market analysis is exactly what individual investors have been waiting for. It democratizes institutional-level insights."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial/Excitement 2 -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Sarah Chen</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Investment Strategist</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "The chat-first approach is revolutionary. Being able to ask complex market questions in plain English and get detailed analysis instantly is a game-changer."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial/Excitement 3 -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Michael Rivera</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Portfolio Manager</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "I've seen a preview of TradePivot's capabilities, and I'm impressed by the depth of analysis and how it makes complex market data accessible to everyone."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Launch Timeline -->
+    <section class="relative z-10 px-4 py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full mb-4 dark:bg-blue-900 dark:text-blue-200">Launch Schedule</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Journey to Launch</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    We're working hard to bring TradePivot to you. Here's our development timeline.
+                </p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-blue-200 dark:bg-blue-800 transform md:translate-x-px"></div>
+                
+                <!-- Timeline items -->
+                <div class="space-y-12">
+                    <!-- Phase 1 - Current -->
+                    <div class="relative flex flex-col md:flex-row items-center md:items-start" data-aos="fade-up">
+                        <div class="order-1 md:order-1 md:w-1/2 pr-0 md:pr-8 text-center md:text-right mb-4 md:mb-0">
+                            <span class="text-blue-600 dark:text-blue-400 font-semibold">Phase 1 - Current</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2">Beta Development</h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Finalizing core AI analysis capabilities and chat interface, with selected beta testers providing feedback.
+                            </p>
+                        </div>
+                        <div class="order-0 md:order-0 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white md:absolute md:left-1/2 md:-translate-x-1/2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="order-2 md:w-1/2 pl-0 md:pl-8 text-center md:text-left">
+                            <span class="inline-block px-3 py-1 text-xs font-semibold text-green-600 bg-green-100 rounded-full mb-1 dark:bg-green-900/30 dark:text-green-400">In Progress</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center md:items-start" data-aos="fade-up" data-aos-delay="100">
+                        <div class="order-1 md:order-1 md:w-1/2 pr-0 md:pr-8 text-center md:text-right mb-4 md:mb-0">
+                            <span class="text-blue-600 dark:text-blue-400 font-semibold">Phase 2</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2">Early Access</h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Limited release to waitlist subscribers for real-world testing and feature refinement.
+                            </p>
+                        </div>
+                        <div class="order-0 md:order-0 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 md:absolute md:left-1/2 md:-translate-x-1/2">
+                            <span class="text-sm font-medium">2</span>
+                        </div>
+                        <div class="order-2 md:w-1/2 pl-0 md:pl-8 text-center md:text-left">
+                            <span class="inline-block px-3 py-1 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full mb-1 dark:bg-gray-800 dark:text-gray-400">Coming Soon</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center md:items-start" data-aos="fade-up" data-aos-delay="200">
+                        <div class="order-1 md:order-1 md:w-1/2 pr-0 md:pr-8 text-center md:text-right mb-4 md:mb-0">
+                            <span class="text-blue-600 dark:text-blue-400 font-semibold">Phase 3</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2">Public Launch</h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Full public release with complete feature set, advanced screeners, and institutional-grade analysis.
+                            </p>
+                        </div>
+                        <div class="order-0 md:order-0 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 md:absolute md:left-1/2 md:-translate-x-1/2">
+                            <span class="text-sm font-medium">3</span>
+                        </div>
+                        <div class="order-2 md:w-1/2 pl-0 md:pl-8 text-center md:text-left">
+                            <span class="inline-block px-3 py-1 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full mb-1 dark:bg-gray-800 dark:text-gray-400">Coming Soon</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 4 -->
+                    <div class="relative flex flex-col md:flex-row items-center md:items-start" data-aos="fade-up" data-aos-delay="300">
+                        <div class="order-1 md:order-1 md:w-1/2 pr-0 md:pr-8 text-center md:text-right mb-4 md:mb-0">
+                            <span class="text-blue-600 dark:text-blue-400 font-semibold">Phase 4</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2">Enterprise Solutions</h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Launch of enterprise-grade B2B offerings with custom API integrations and white-label options.
+                            </p>
+                        </div>
+                        <div class="order-0 md:order-0 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 md:absolute md:left-1/2 md:-translate-x-1/2">
+                            <span class="text-sm font-medium">4</span>
+                        </div>
+                        <div class="order-2 md:w-1/2 pl-0 md:pl-8 text-center md:text-left">
+                            <span class="inline-block px-3 py-1 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full mb-1 dark:bg-gray-800 dark:text-gray-400">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative z-10 px-4 py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+        <div class="container mx-auto max-w-6xl text-center">
+            <div data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Ready to Transform Your<br />Trading Experience?</h2>
+                <p class="text-lg md:text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
+                    Join the waitlist today and be among the first to experience the revolution in stock market analysis.
+                </p>
+                
+                <form class="flex flex-col sm:flex-row mx-auto mb-10 max-w-lg gap-4">
+                    <input type="email" class="flex-1 px-6 py-4 rounded-lg bg-white/10 border border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 placeholder-blue-200/70 text-white" placeholder="Your email address" required />
+                    <button type="submit" class="px-8 py-4 bg-white hover:bg-blue-50 text-blue-600 font-bold rounded-lg transition-colors duration-300 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-white">
+                        Join Waitlist
+                    </button>
+                </form>
+                
+                <p class="text-sm text-blue-200 mb-8">
+                    No spam, ever. We respect your privacy and you can unsubscribe at any time.
+                </p>
+                
+                <div class="flex justify-center items-center space-x-6">
+                    <div class="flex flex-col items-center">
+                        <span class="text-3xl font-bold">500+</span>
+                        <span class="text-sm text-blue-200">Beta Testers</span>
+                    </div>
+                    <div class="w-px h-12 bg-blue-400/30"></div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-3xl font-bold">95%</span>
+                        <span class="text-sm text-blue-200">Satisfaction Rate</span>
+                    </div>
+                    <div class="w-px h-12 bg-blue-400/30"></div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-3xl font-bold">2M+</span>
+                        <span class="text-sm text-blue-200">Data Points Processed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 px-4 py-12 bg-gray-900 text-gray-400">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <div class="bg-blue-600 text-white p-2 rounded-lg mr-2">
+                        <i class="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Trade<span class="text-blue-500">Pivot</span></h2>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 hover:bg-blue-600 flex items-center justify-center transition-colors duration-300">
+                        <i class="fab fa-twitter text-white"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 hover:bg-blue-600 flex items-center justify-center transition-colors duration-300">
+                        <i class="fab fa-linkedin-in text-white"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 hover:bg-blue-600 flex items-center justify-center transition-colors duration-300">
+                        <i class="fab fa-instagram text-white"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 pb-4">
+                <div class="flex flex-col md:flex-row justify-between">
+                    <div class="mb-6 md:mb-0">
+                        <p class="text-sm">© 2025 TradePivot. All rights reserved.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-4 md:gap-8">
+                        <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">Terms of Service</a>
+                        <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <p class="text-xs text-gray-500">Contact: <a href="mailto:contact@tradepivot.in" class="hover:text-blue-400 transition-colors duration-300">contact@tradepivot.in</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+        
+        // Dark mode toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            // Change the icons inside the button based on previous settings
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                themeToggleLightIcon.classList.remove('hidden');
+                document.documentElement.classList.add('dark');
+            } else {
+                themeToggleDarkIcon.classList.remove('hidden');
+                document.documentElement.classList.remove('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', function() {
+                // Toggle icons
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+
+                // If set via local storage previously
+                if (localStorage.getItem('color-theme')) {
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    // If not set via local storage previously
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+            });
+        });
+        
+        // Simple carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselItems = document.querySelector('.carousel-items');
+            const dots = document.querySelectorAll('.custom-dot');
+            const itemWidth = 400; // Approximate width of each item with spacing
+            let currentIndex = 0;
+            
+            function updateCarousel() {
+                const offset = -currentIndex * itemWidth;
+                carouselItems.style.transform = `translateX(${offset}px)`;
+                carouselItems.style.transition = 'transform 0.5s ease';
+                
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+            
+            // Add click events to dots
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateCarousel();
+                });
+            });
+            
+            // Auto-scroll the carousel
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % dots.length;
+                updateCarousel();
+            }, 5000);
+            
+            // Initial setup
+            updateCarousel();
+        });
+    </script>
 </body>
 </html>
